@@ -2,6 +2,7 @@
 class LiveSoundEffects {
   private ctx: AudioContext | null = null;
   public enabled: boolean = true;
+  public soundPreset: 'cyber' | 'retro' | 'clicks' | 'rev' = 'cyber';
 
   private initCtx() {
     if (!this.ctx && typeof window !== 'undefined') {
@@ -43,47 +44,40 @@ class LiveSoundEffects {
     }
   }
 
-  // Rotating mechanical / energy spin sound with oscillating speed
+  // Rotating audio (Mechanical Clicks only)
   public playSpin(durationMs: number) {
     if (!this.enabled) return;
     this.initCtx();
     if (!this.ctx) return;
 
+    const totalDurationSec = durationMs / 1000;
+
     try {
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-
-      osc.type = 'sawtooth';
+      // Mechanical Gear Clicks
+      const totalTicks = 24;
+      const startTime = this.ctx.currentTime;
       
-      // Frequency sweeping down to represent the slowing wheel
-      osc.frequency.setValueAtTime(120, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(40, this.ctx.currentTime + (durationMs / 1000));
-
-      // Quick amplitude modulation for clicking clicks during rotation
-      const modulation = this.ctx.createOscillator();
-      const modulationGain = this.ctx.createGain();
-      
-      modulation.type = 'sine';
-      modulation.frequency.setValueAtTime(15, this.ctx.currentTime);
-      modulation.frequency.exponentialRampToValueAtTime(4, this.ctx.currentTime + (durationMs / 1000));
-      
-      modulationGain.gain.setValueAtTime(30, this.ctx.currentTime);
-      modulationGain.gain.exponentialRampToValueAtTime(5, this.ctx.currentTime + (durationMs / 1000));
-
-      modulation.connect(modulationGain);
-      modulationGain.connect(osc.frequency);
-
-      gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + (durationMs / 1000));
-
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-
-      modulation.start();
-      osc.start();
-      
-      modulation.stop(this.ctx.currentTime + (durationMs / 1000));
-      osc.stop(this.ctx.currentTime + (durationMs / 1000));
+      for (let i = 0; i < totalTicks; i++) {
+        // Logarithmic spacing for physics deceleration feel
+        const progress = i / totalTicks;
+        const tickTime = startTime + totalDurationSec * Math.pow(progress, 1.8);
+        
+        const tickOsc = this.ctx.createOscillator();
+        const tickGain = this.ctx.createGain();
+        
+        tickOsc.type = 'triangle';
+        tickOsc.frequency.setValueAtTime(750 - (i * 18), tickTime);
+        tickOsc.frequency.exponentialRampToValueAtTime(40, tickTime + 0.025);
+        
+        tickGain.gain.setValueAtTime(0.07, tickTime);
+        tickGain.gain.exponentialRampToValueAtTime(0.001, tickTime + 0.025);
+        
+        tickOsc.connect(tickGain);
+        tickGain.connect(this.ctx.destination);
+        
+        tickOsc.start(tickTime);
+        tickOsc.stop(tickTime + 0.025);
+      }
     } catch (e) {
       console.warn('Audio spin failed', e);
     }

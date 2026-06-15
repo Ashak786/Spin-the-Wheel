@@ -128,7 +128,7 @@ export default function ActiveQuestionModal({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 30 }}
         transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-        className={`w-full max-w-lg border ${categoryTheme.border} ${isDarkMode ? `${categoryTheme.glow} bg-slate-900 text-slate-100` : 'bg-white text-slate-800 shadow-2xl'} rounded-2xl overflow-hidden relative shadow-2xl p-6 md:p-8 select-none`}
+        className={`w-full max-w-2xl md:max-w-3xl border ${categoryTheme.border} ${isDarkMode ? `${categoryTheme.glow} bg-slate-900 text-slate-100` : 'bg-white text-slate-800 shadow-2xl'} rounded-3xl overflow-hidden relative shadow-2xl p-6 sm:p-8 md:p-10 select-none`}
         id="question-modal-container"
       >
         {/* Top Close (X) button */}
@@ -177,23 +177,23 @@ export default function ActiveQuestionModal({
         </div>
 
         {/* The Core Question Segment */}
-        <div className={`text-center py-5 px-4 space-y-4 rounded-2xl bg-gradient-to-b ${categoryTheme.bg} border ${isDarkMode ? 'border-slate-800/50' : 'border-slate-150 shadow-inner'}`}>
-          <div className={`w-10 h-10 mx-auto rounded-full flex items-center justify-center border ${isDarkMode ? 'bg-slate-950/85 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-            <HelpCircle className={`w-5 h-5 ${categoryTheme.text} animate-bounce`} />
+        <div className={`text-center py-7 px-5 space-y-4 rounded-3xl bg-gradient-to-b ${categoryTheme.bg} border ${isDarkMode ? 'border-slate-800/50' : 'border-slate-150 shadow-inner'}`}>
+          <div className={`w-12 h-12 mx-auto rounded-full flex items-center justify-center border ${isDarkMode ? 'bg-slate-950/85 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+            <HelpCircle className={`w-6 h-6 ${categoryTheme.text} animate-bounce`} />
           </div>
           
           <div className="space-y-2">
             <span className={`text-[10px] font-mono uppercase tracking-widest block ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>
               TRIVIA QUESTION
             </span>
-            <h3 className={`font-sans text-base md:text-lg font-bold tracking-tight leading-relaxed ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
+            <h3 className={`font-sans text-base sm:text-lg md:text-xl font-extrabold tracking-tight leading-relaxed ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
               {question.question_text}
             </h3>
           </div>
         </div>
 
         {/* Multiple Choice Options List */}
-        <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-64 overflow-y-auto pr-1">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[420px] overflow-y-auto pr-1">
           {options.map((option, index) => {
             const isSelected = selectedOption === option;
             const isCorrectAnswer = option.trim().toLowerCase() === question.answer?.trim().toLowerCase();
@@ -216,14 +216,14 @@ export default function ActiveQuestionModal({
                   : "bg-emerald-50/80 border-emerald-400 text-emerald-900 shadow-sm";
                 textStyle = "font-bold text-emerald-500";
                 optionBadgeStyle = "bg-emerald-500 border-emerald-400 text-white";
-                icon = <Check className="w-4 h-4 text-emerald-400 shrink-0 stroke-[3]" />;
+                icon = <Check className="w-4 h-4 text-emerald-400 shrink-0 stroke-[3] mt-1" />;
               } else if (isSelected) {
                 btnStyle = isDarkMode
                   ? "bg-rose-950/30 border-rose-500/60 text-slate-300"
                   : "bg-rose-50 border-rose-450 text-rose-950";
                 textStyle = "line-through text-rose-500 font-medium";
                 optionBadgeStyle = "bg-rose-500 border-rose-450 text-white";
-                icon = <X className="w-4 h-4 text-rose-500 shrink-0 stroke-[3]" />;
+                icon = <X className="w-4 h-4 text-rose-500 shrink-0 stroke-[3] mt-1" />;
               } else {
                 btnStyle = isDarkMode
                   ? "bg-slate-950/15 border-slate-900 text-slate-600 opacity-40 cursor-not-allowed"
@@ -239,13 +239,13 @@ export default function ActiveQuestionModal({
                 type="button"
                 onClick={() => handleOptionSelect(option)}
                 disabled={hasSubmitted}
-                className={`w-full text-left px-4 py-3 rounded-xl border flex items-center justify-between gap-3 transition-all duration-200 ${btnStyle}`}
+                className={`w-full text-left px-5 py-4 rounded-2xl border flex items-start justify-between gap-3.5 transition-all duration-200 ${btnStyle}`}
               >
-                <div className="flex items-center gap-3 min-w-0">
-                  <span className={`w-6 h-6 rounded-lg text-xs font-mono flex items-center justify-center font-bold border shrink-0 transition-all ${optionBadgeStyle}`}>
+                <div className="flex items-start gap-3.5 min-w-0 flex-1">
+                  <span className={`w-7 h-7 rounded-xl text-xs font-mono flex items-center justify-center font-bold border shrink-0 transition-all mt-0.5 ${optionBadgeStyle}`}>
                     {String.fromCharCode(65 + index)}
                   </span>
-                  <span className={`font-sans text-xs sm:text-sm leading-normal truncate ${textStyle}`} title={option}>
+                  <span className={`font-sans text-xs sm:text-sm leading-relaxed whitespace-normal break-words py-0.5 ${textStyle}`} title={option}>
                     {option}
                   </span>
                 </div>

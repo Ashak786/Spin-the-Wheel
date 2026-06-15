@@ -50,6 +50,7 @@ export default function App() {
   // Read saved statistics & DB connection state on launch
   useEffect(() => {
     liveAudio.enabled = soundEnabled;
+    liveAudio.soundPreset = 'clicks';
     const stored = localStorage.getItem(STATS_STORAGE_KEY);
     if (stored) {
       try {
