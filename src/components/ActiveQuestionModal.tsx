@@ -193,7 +193,7 @@ export default function ActiveQuestionModal({
         </div>
 
         {/* Multiple Choice Options List */}
-        <div className="mt-5 space-y-2.5 max-h-64 overflow-y-auto pr-1">
+        <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-64 overflow-y-auto pr-1">
           {options.map((option, index) => {
             const isSelected = selectedOption === option;
             const isCorrectAnswer = option.trim().toLowerCase() === question.answer?.trim().toLowerCase();

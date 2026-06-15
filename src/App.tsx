@@ -316,38 +316,10 @@ export default function App() {
       </header>
 
       {/* CORE GRID LAYOUT */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <main className="w-full max-w-full md:max-w-[90vw] lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 flex flex-col items-center justify-center min-h-[calc(100vh-100px)] transition-all duration-300">
         
-        {/* LEFT COLUMN: Supabase Settings & Live Stats Telemetry */}
-        <div className="lg:col-span-5 space-y-6">
-          
-          {/* Welcome Card Info */}
-          <section className={`border rounded-2xl p-6 relative overflow-hidden flex flex-col gap-2 ${isDarkMode ? 'bg-slate-900 border-slate-800 text-slate-100' : 'bg-white border-slate-200 text-slate-800 shadow-sm'}`}>
-            <div className="absolute right-[-15px] top-[-15px] w-24 h-24 rounded-full bg-gradient-to-br from-purple-500/10 to-transparent blur-xl pointer-events-none" />
-            <h2 className={`font-outfit font-extrabold text-lg uppercase tracking-tight flex items-center gap-2 ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}>
-              <Zap className="w-5 h-5 text-yellow-neon animate-pulse" />
-              CISCO Wellbeing!
-            </h2>
-            <p className={`text-xs leading-normal ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-              Put your piston knowledge to the ultimate high-speed test. Spin the colorful wheel to pick a car trivia category. Answer questions correctly before the <strong>60-second timer</strong> ticks to zero to inflate your score combo multipliers!
-            </p>
-            
-
-          </section>
-
-          {/* Connection GUI config */}
-          <section>
-            <SupabaseConfigPanel onConnectionChange={verifyDatabase} isDarkMode={isDarkMode} />
-          </section>
-
-          {/* Telemetry metrics dashboard */}
-          <section>
-            <GameStatsGrid stats={stats} onResetStats={handleResetStats} isDarkMode={isDarkMode} wheelCategories={wheelCategories} />
-          </section>
-        </div>
-
-        {/* RIGHT COLUMN: The Magnificent Spinning Wheel Area */}
-        <div className={`lg:col-span-7 flex flex-col items-center justify-center py-6 lg:py-12 border rounded-3xl p-8 relative min-h-[500px] ${isDarkMode ? 'bg-slate-900/35 border-slate-900' : 'bg-white border-slate-200 shadow-sm'}`} id="wheel-arena">
+        {/* The Magnificent Spinning Wheel Area */}
+        <div className={`w-full flex-1 flex flex-col items-center justify-center py-10 lg:py-16 border rounded-3xl p-8 relative self-stretch ${isDarkMode ? 'bg-slate-900/35 border-slate-900' : 'bg-white border-slate-200 shadow-sm'}`} id="wheel-arena">
           <div className={`absolute top-4 left-4 flex gap-1.5 text-[10px] font-mono uppercase ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>
             <span>pointer position: 12 o'clock</span>
           </div>
@@ -376,7 +348,7 @@ export default function App() {
                   ease: [0.1, 0.8, 0.15, 1], // Perfect slow-down curves matching real momentum
                   duration: 3.2
                 }}
-                className="w-72 h-72 sm:w-96 sm:h-96"
+                className="w-[320px] h-[320px] sm:w-[440px] sm:h-[440px] md:w-[500px] md:h-[500px] lg:w-[580px] lg:h-[580px] max-w-full"
               >
                 <svg
                   viewBox="0 0 360 360"
