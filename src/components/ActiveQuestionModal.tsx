@@ -122,13 +122,13 @@ export default function ActiveQuestionModal({
   const options = question.options || [];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-slate-950/85 backdrop-blur-sm">
       <motion.div 
         initial={{ opacity: 0, scale: 0.9, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 30 }}
         transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-        className={`w-full max-w-2xl md:max-w-3xl border ${categoryTheme.border} ${isDarkMode ? `${categoryTheme.glow} bg-slate-900 text-slate-100` : 'bg-white text-slate-800 shadow-2xl'} rounded-3xl overflow-hidden relative shadow-2xl p-6 sm:p-8 md:p-10 select-none`}
+        className={`w-full max-w-[96%] sm:max-w-[92vw] md:max-w-4xl lg:max-w-5xl xl:max-w-6xl border ${categoryTheme.border} ${isDarkMode ? `${categoryTheme.glow} bg-slate-900 text-slate-100` : 'bg-white text-slate-800 shadow-2xl'} rounded-3xl overflow-hidden relative shadow-2xl p-6 sm:p-8 md:p-10 select-none`}
         id="question-modal-container"
       >
         {/* Top Close (X) button */}
@@ -193,7 +193,7 @@ export default function ActiveQuestionModal({
         </div>
 
         {/* Multiple Choice Options List */}
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[420px] overflow-y-auto pr-1">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[50vh] md:max-h-[55vh] overflow-y-auto pr-1">
           {options.map((option, index) => {
             const isSelected = selectedOption === option;
             const isCorrectAnswer = option.trim().toLowerCase() === question.answer?.trim().toLowerCase();
