@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-pink-neon: #ff007f;
+  --color-yellow-neon: #fffb00;
+  --color-cyan-neon: #00f0ff;
+  --color-purple-neon: #9d00ff;
+}
+
+/* Custom background animation or neon text stroke helpers */
+.neon-glow-pink {
+  text-shadow: 0 0 10px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4);
+}
+.neon-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.4);
+}
+.neon-glow-yellow {
+  text-shadow: 0 0 10px rgba(255, 251, 0, 0.6), 0 0 20px rgba(255, 251, 0, 0.4);
+}
+
+.neon-border-pink {
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.4), inset 0 0 15px rgba(255, 0, 127, 0.2);
+}
+.neon-border-cyan {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.95; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s infinite ease-in-out;
+}

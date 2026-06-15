@@ -1,0 +1,6 @@
+{
+  "name": "Spin the Wheel Game",
+  "description": "A high-energy car trivia game featuring colorful, funky categories: Car Myth or Fact, Guess the Price, and Car Quiz, integrated with Supabase.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
